@@ -1,4 +1,4 @@
-const Koa = require("koa");
+const koa = require("koa");
 const BodyParser = require("koa-bodyparser");
 const Router = require("koa-router");
 const Logger = require("koa-logger");
@@ -8,16 +8,34 @@ const serve = require("koa-static");
 const mount = require("koa-mount");
 const HttpStatus = require("http-status");
 
-const app = new Koa();
+var app = koa();
 const PORT = '3001';
 
 app.use(BodyParser());
 app.use(Logger());
 app.use(cors());
 
-const users = require(resolve(__dirname, 'routes', 'users'));
-appr.use(mount('/users', users));
+var db = mysql.createPool({ user: 'webserver', password: '$@#C@dij$E@#E', database: 'accounts', host: 'localhost' });
 
+app.use(function* () {
+    try {
+        // Execute a sample query (with params)
+        var rows = yield db.query("select ? + ? as test", [1, 2]);
+ 
+        // Output test result (3)
+        this.body = { test: rows[0].test };
+    }
+    catch (err) {
+        // 500 Internal Server Error
+        this.status = 500;
+        this.body = { error: err };
+    }
+});
+
+const router = new Router();
+
+
+app.use(router.routes()).use(router.allowedMethods());
 app.listen(PORT, function () {
     console.log("  Listening on port %s. Visit http://localhost:%s/", PORT, PORT);
 });

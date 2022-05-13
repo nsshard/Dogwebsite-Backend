@@ -12,7 +12,18 @@ userRouter
     const { id } = ctx.params;
     console.log(`Get user with id ${id}`);
   })
- 
+  .post('/', ctx => {
+    console.log('Create a new user');
+  })
+  .put('/:id', ctx => {
+    const { id } = ctx.params;
+    console.log(`Update user with id ${id},\nor create one if it doesn't exist`);
+  })
+  .delete('/:id', ctx => {
+    const { id } = ctx.params;
+    console.log(`Delete user with id ${id}`);
+  });
+
 users.use(userRouter.routes());
 users.use(userRouter.allowedMethods());
 
