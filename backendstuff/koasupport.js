@@ -8,7 +8,7 @@ const serve = require("koa-static");
 const mount = require("koa-mount");
 const HttpStatus = require("http-status");
 
-var app = koa();
+var app = new koa();
 const PORT = '3001';
 
 app.use(BodyParser());
