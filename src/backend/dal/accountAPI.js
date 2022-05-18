@@ -17,6 +17,10 @@ const getaccount = async id =>{
     return await getById(id);
 }
 
+const UserNameAlreadyExists = async id =>{
+    return await getById(id);
+}
+
 const deleteaccount = async id =>{
     return await removebyId(id);
 }
@@ -31,5 +35,5 @@ module.exports = {
     getaccount,
     getaccounts,
     deleteaccount,
-    updateaccount
+    updateaccount, UserNameAlreadyExists
 }

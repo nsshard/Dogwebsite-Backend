@@ -3,5 +3,6 @@ const Router = require("koa-router");
 const {createaccount,
   getaccount,
   getaccounts,
-  deleteaccount,
+  deleteaccount, 
+  UserNameAlreadyExists,
   updateaccount} = require('./accountAPI')
